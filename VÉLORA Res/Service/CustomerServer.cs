@@ -148,5 +148,22 @@ namespace VÉLORA_Res.Services
 
             command.ExecuteNonQuery();
         }
+        public int GetCustomerCount()
+        {
+            const string query = @"
+        SELECT COUNT(*)
+        FROM dbo.Customers;";
+
+            using SqlConnection connection =
+                _database.CreateConnection();
+
+            using SqlCommand command =
+                new SqlCommand(query, connection);
+
+            connection.Open();
+
+            return Convert.ToInt32(
+                command.ExecuteScalar());
+        }
     }
 }
